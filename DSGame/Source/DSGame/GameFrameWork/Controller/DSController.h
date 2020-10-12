@@ -9,4 +9,7 @@ UCLASS()
 class DS_API ADSPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+protected:
+	void SetupInputComponent() override;
 };
