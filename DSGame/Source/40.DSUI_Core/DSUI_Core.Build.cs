@@ -7,8 +7,10 @@ public class DSUI_Core : ModuleRules
 	public DSUI_Core(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "UMG" });
+
+        PublicIncludePaths.Add(ModuleDirectory);
+
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "UMG" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

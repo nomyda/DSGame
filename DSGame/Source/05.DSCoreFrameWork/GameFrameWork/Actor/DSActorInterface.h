@@ -11,4 +11,6 @@ class UDSActorInterface : public UInterface
 class IDSActorInterface
 {
 	GENERATED_BODY()
+
+protected:
 };

@@ -3,15 +3,15 @@
 #include "DSCore.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_GAME_MODULE( FDSUI_Core, DSCore);
+IMPLEMENT_GAME_MODULE( FDSCore, DSCore);
 
 
-void FDSUI_Core::StartupModule()
+void FDSCore::StartupModule()
 {
 
 }
 
-void FDSUI_Core::ShutdownModule()
+void FDSCore::ShutdownModule()
 {
 
 }

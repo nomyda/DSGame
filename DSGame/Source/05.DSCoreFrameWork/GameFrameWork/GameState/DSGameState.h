@@ -8,7 +8,7 @@
  * 
  */
 UCLASS()
-class DS_API ADSGameState : public AGameStateBase
+class DSCOREFRAMEWORK_API ADSGameState : public AGameStateBase
 {
 	GENERATED_BODY()
 	

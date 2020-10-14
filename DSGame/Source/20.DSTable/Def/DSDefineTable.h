@@ -3,5 +3,6 @@
 enum ETableType
 {
 	None,
+	Actor,
 	Max,
 };

@@ -10,7 +10,7 @@ public class DS : ModuleRules
 
         PublicIncludePaths.Add(ModuleDirectory);
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "DSUI_Core" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "DSCoreFrameWork", "DSUI_Core", "DSTable" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

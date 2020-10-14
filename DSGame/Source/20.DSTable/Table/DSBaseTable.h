@@ -10,8 +10,11 @@ struct FDSBaseTable : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	ETableType Type() const { return m_TableType; }
+	FDSBaseTable()
+	{
 
-private:
-	ETableType m_TableType;
+	}
+
+	virtual ETableType Type() const { return ETableType::None; }
+	UPROPERTY(EditAnywhere) int32 Take;
 };

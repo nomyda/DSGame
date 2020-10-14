@@ -2,15 +2,15 @@
 
 using UnrealBuildTool;
 
-public class DSCore : ModuleRules
+public class DSCoreFrameWork : ModuleRules
 {
-	public DSCore(ReadOnlyTargetRules Target) : base(Target)
+	public DSCoreFrameWork(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicIncludePaths.Add(ModuleDirectory);
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

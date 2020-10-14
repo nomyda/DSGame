@@ -7,9 +7,14 @@
  *
  */
 UCLASS()
-class DS_API ADSActor : public AActor, public IDSActorInterface
+class DSCOREFRAMEWORK_API ADSActor : public AActor, public IDSActorInterface
 {
 	GENERATED_BODY()
+
+public:
+	ADSActor();
+	ADSActor(const FObjectInitializer& ObjectInitializer);
+	virtual ~ADSActor();
 
 protected:
 	void BeginPlay() override;

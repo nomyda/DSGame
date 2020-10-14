@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-class FDSCore : public IModuleInterface
+class FDSCoreFrameWork : public IModuleInterface
 {
 public:
 	// Begin IModuleInterface implementation

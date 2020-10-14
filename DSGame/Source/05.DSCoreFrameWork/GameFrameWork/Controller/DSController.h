@@ -6,7 +6,7 @@
  *
  */
 UCLASS()
-class DS_API ADSPlayerController : public APlayerController
+class DSCOREFRAMEWORK_API ADSPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 

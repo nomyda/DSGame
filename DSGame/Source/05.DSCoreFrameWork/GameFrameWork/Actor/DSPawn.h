@@ -7,9 +7,14 @@
  *
  */
 UCLASS()
-class DS_API ADSPawn : public APawn, public IDSActorInterface
+class DSCOREFRAMEWORK_API ADSPawn : public APawn, public IDSActorInterface
 {
 	GENERATED_BODY()
+
+public:
+	ADSPawn();
+	ADSPawn(const FObjectInitializer& ObjectInitializer);
+	virtual ~ADSPawn();
 
 protected:
 	void BeginPlay() override;
