@@ -3,7 +3,7 @@
 #include "DSTable.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_GAME_MODULE( FDSTable, DSTable);
+IMPLEMENT_GAME_MODULE(FDefaultModuleImpl, DSTable);
 
 
 void FDSTable::StartupModule()

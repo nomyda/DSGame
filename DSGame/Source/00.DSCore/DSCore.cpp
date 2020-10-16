@@ -3,7 +3,7 @@
 #include "DSCore.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_GAME_MODULE( FDSCore, DSCore);
+IMPLEMENT_GAME_MODULE(FDefaultModuleImpl, DSCore);
 
 
 void FDSCore::StartupModule()

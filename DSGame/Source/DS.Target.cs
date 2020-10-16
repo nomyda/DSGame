@@ -9,6 +9,6 @@ public class DSTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "DSCore", "DSCoreFrameWork", "DSTable", "DSUI_Core", "DS" } );
+		ExtraModuleNames.AddRange( new string[] { "DSCore", "DSCoreFrameWork", "DSTable", "DSUI_Core", "DSUtil", "DS" } );
 	}
 }

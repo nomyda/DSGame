@@ -1,16 +1,16 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
 
-public class DS : ModuleRules
+public class DSUtil : ModuleRules
 {
-	public DS(ReadOnlyTargetRules Target) : base(Target)
+	public DSUtil(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicIncludePaths.Add(ModuleDirectory);
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "DSCoreFrameWork", "DSUI_Core", "DSUtil", "DSTable" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
