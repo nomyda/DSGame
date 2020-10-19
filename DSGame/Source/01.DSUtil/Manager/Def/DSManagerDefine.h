@@ -8,6 +8,7 @@ namespace Manager
 		{
 			None,
 			ClientVariable,
+			Actor,
 			Max,
 		};
 	}	

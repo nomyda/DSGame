@@ -1,8 +1,15 @@
 #include "IManager.h"
+#include "Misc/AssertionMacros.h"
 
 namespace Manager
 {
 	IManager* IManager::ms_DetailM[] = {nullptr,};
+
+	Def::EManager_Index IManager::GetIndex() const
+	{
+		ensureMsgf(false, TEXT("You must override this"));
+		return Def::EManager_Index::None;
+	}
 
 	int32 IManager::InitAll()
 	{

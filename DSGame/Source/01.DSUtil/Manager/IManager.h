@@ -6,7 +6,7 @@ namespace Manager
 	class DSUTIL_API IManager
 	{
 	public:		
-		virtual Def::EManager_Index GetIndex() const { return Def::EManager_Index::None; }
+		virtual Def::EManager_Index GetIndex() const;
 		static int32 InitAll();
 		static int32 ReleaseAll();
 

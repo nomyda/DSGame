@@ -2,7 +2,7 @@
 
 
 #include "DSGameInstance.h"
-#include "Manager/ClientVariable/DSClientVariableM.h"
+#include "Manager/IManager.h"
 
 void UDSGameInstance::Init()
 {
