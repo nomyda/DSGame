@@ -7,7 +7,6 @@ namespace Manager
 	class DSUTIL_API DSClientVariableM : public DSBaseM<DSClientVariableM>
 	{
 	public:
-		Def::EManager_Index GetIndex() const override;
 		void RegistConsolCommand(const TCHAR* FuncKey, const FConsoleCommandWithArgsDelegate& CommandDelegate, const FString& Help);
 
 	protected:

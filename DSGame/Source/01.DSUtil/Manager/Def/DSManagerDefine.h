@@ -9,6 +9,7 @@ namespace Manager
 			None,
 			ClientVariable,
 			Actor,
+			ActorTable,
 			Max,
 		};
 	}	

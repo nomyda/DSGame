@@ -6,7 +6,6 @@ namespace Manager
 	class DSUTIL_API IManager
 	{
 	public:		
-		virtual Def::EManager_Index GetIndex() const;
 		static int32 InitAll();
 		static int32 ReleaseAll();
 
@@ -15,6 +14,6 @@ namespace Manager
 		virtual bool Release() { return false; };
 
 	protected:
-		static IManager* ms_DetailM[static_cast<int32>(Def::EManager_Index::Max)];
+		static TArray<IManager*> ms_ArrDetailM;
 	};
 }

@@ -2,15 +2,15 @@
 
 using UnrealBuildTool;
 
-public class DSTable : ModuleRules
+public class DSActor : ModuleRules
 {
-	public DSTable(ReadOnlyTargetRules Target) : base(Target)
+	public DSActor(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicIncludePaths.Add(ModuleDirectory);
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "DSUtil" });
+
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "DSCoreFrameWork" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
@@ -22,5 +22,5 @@ public class DSTable : ModuleRules
 
         // To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
         bUseUnity = false;
-    }
+	}
 }

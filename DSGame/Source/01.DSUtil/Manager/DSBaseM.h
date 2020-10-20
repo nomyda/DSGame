@@ -17,8 +17,7 @@ namespace Manager
 		{
 			if (false == m_bCreate)
 			{
-				int32 Index = static_cast<int32>(m_DetailM.GetIndex());
-				IManager::ms_DetailM[Index] = &m_DetailM;
+				ms_ArrDetailM.Add(&m_DetailM);
 				m_bCreate = true;
 			}
 		}

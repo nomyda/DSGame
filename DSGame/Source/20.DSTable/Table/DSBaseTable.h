@@ -16,5 +16,4 @@ public:
 	}
 
 	virtual ETableType Type() const { return ETableType::None; }
-	UPROPERTY(EditAnywhere) int32 Take;
 };
