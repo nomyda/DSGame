@@ -8,11 +8,13 @@ class DSSingleton
 {
 public:
 	typedef TSharedPtr<T> SharedSingleton;
-	static T& Get();
+	static T& Instance();
+
 
 protected:	
 	DSSingleton() {}
 	virtual ~DSSingleton() {}
+
 
 private:	
 	static SharedSingleton m_Instance;
