@@ -2,8 +2,8 @@
 #include "Engine/AssetManager.h"
 
 
-
 DSAsyncLoadingM::DSAsyncLoadingM()
+	: m_AsyncLoadID(0)
 {
 
 }
@@ -13,20 +13,41 @@ DSAsyncLoadingM::~DSAsyncLoadingM()
 
 }
 
-bool DSAsyncLoadingM::RequestAsyncLoad(const FString& Path, FOnLoadingComplete rDelegate_OnLoadingComplete)
+bool DSAsyncLoadingM::IsValid() const
 {
-	UAssetManager& rAssetM = UAssetManager::Get();
-	FStreamableManager& rStreamableM = rAssetM.GetStreamableManager();
+	return UAssetManager::IsValid();
+}
 
+uint32 DSAsyncLoadingM::RequestAsyncLoading(const FSoftObjectPath& Path, FOnLoadingComplete rDelegate_OnLoadingComplete)
+{
+	if (false == IsValid())
+		return InvalidAsyncLoadingID;
 
-	FSoftObjectPath RequestAssetPath(Path);	
-	SharedStreamableHandle HandlePtr = rStreamableM.RequestAsyncLoad(RequestAssetPath, FStreamableDelegate::CreateRaw(this, &DSAsyncLoadingM::OnLoadingComplete));
+	SharedStreamableHandle HandlePtr = GetStreamableM().RequestAsyncLoad(Path, FStreamableDelegate::CreateRaw(this, &DSAsyncLoadingM::OnLoadingComplete));
 	if (false == HandlePtr.IsValid())
-		return false;
+		return InvalidAsyncLoadingID;
 
-	DSAsyncLoadingInfo& rInfo = m_smapPath_And_AsyncLoadingInfo.FindOrAdd(Path);
+	uint32 uiCurAsyncLoadID = (++m_AsyncLoadID);
+	DSAsyncLoadingInfo& rInfo = m_smapAsyncLoadID_And_AsyncLoadingInfo.FindOrAdd(uiCurAsyncLoadID);
 	rInfo.m_HandlePtr = HandlePtr;
 	rInfo.m_ArrDelegate_OnLoadingComplete.Add(rDelegate_OnLoadingComplete);
+	return uiCurAsyncLoadID;
+}
+
+bool DSAsyncLoadingM::CancelAsyncLoading(const uint32 AsyncLoadingID)
+{
+	if (false == IsValid())
+		return false;
+
+	DSAsyncLoadingInfo* pInfo = m_smapAsyncLoadID_And_AsyncLoadingInfo.Find(AsyncLoadingID);
+	if (nullptr == pInfo)
+		return false;
+
+	if (false == pInfo->m_HandlePtr.IsValid())
+		return false;
+
+	pInfo->m_HandlePtr->CancelHandle();
+	m_smapAsyncLoadID_And_AsyncLoadingInfo.Remove(AsyncLoadingID);
 	return true;
 }
 
@@ -37,7 +58,7 @@ void DSAsyncLoadingM::OnInstance()
 
 void DSAsyncLoadingM::OnLoadingComplete()
 {
-	SMap_Path_And_LoadingInfo::TIterator Itr = m_smapPath_And_AsyncLoadingInfo.CreateIterator();
+	SMap_AsyncLoadID_And_LoadingInfo::TIterator Itr = m_smapAsyncLoadID_And_AsyncLoadingInfo.CreateIterator();
 	while (Itr)
 	{
 		DSAsyncLoadingInfo& rInfo = (*Itr).Value;
@@ -51,7 +72,7 @@ void DSAsyncLoadingM::OnLoadingComplete()
 		{
 			for (auto& CurDelegate : rInfo.m_ArrDelegate_OnLoadingComplete)
 			{
-				CurDelegate.ExecuteIfBound(rInfo.m_HandlePtr);
+				CurDelegate.ExecuteIfBound((*Itr).Key, rInfo.m_HandlePtr->GetLoadedAsset());
 			}
 
 			Itr.RemoveCurrent();
@@ -60,4 +81,11 @@ void DSAsyncLoadingM::OnLoadingComplete()
 
 		++Itr;
 	}
+}
+
+FStreamableManager& DSAsyncLoadingM::GetStreamableM() const
+{
+	static UAssetManager& rAssetM = UAssetManager::Get();
+	static FStreamableManager& rStreamableM = rAssetM.GetStreamableManager();
+	return rStreamableM;
 }

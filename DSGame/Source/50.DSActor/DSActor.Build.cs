@@ -10,7 +10,7 @@ public class DSActor : ModuleRules
 
         PublicIncludePaths.Add(ModuleDirectory);
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "DSCoreFrameWork" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "DSUtil", "DSCoreFrameWork", "DSTable" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

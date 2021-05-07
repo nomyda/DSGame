@@ -1,12 +1,9 @@
 #pragma once
-#include "DSBaseTableM.h"
+#include "ITableMgr.h"
 #include "Table/Actor/DSActorTable.h"
 
-namespace Manager
+class DSTABLE_API DSActorTableM : public ITableM, public DSSingleton<DSActorTableM>
 {
-	class DSTABLE_API DSActorTableM : public DSBaseTableM<DSActorTableM, ::FDSActorTable>
-	{
-	public:
-		DSActorTableM();
-	};
-}
+public:
+	void OnInstance();
+};

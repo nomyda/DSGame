@@ -1,10 +1,8 @@
 #include "DSActorTableM.h"
+#include "Table/Actor/DSActorTable.h"
 
-namespace Manager
+void DSActorTableM::OnInstance()
 {
-	DSActorTableM::DSActorTableM()
-		: DSBaseTableM<DSActorTableM, ::FDSActorTable>()
-	{
-		AddAssetPath(TEXT("DataTable'/Game/Table/Actor/ActorTable.ActorTable'"));
-	}
+	AddDataTablePathToLoad(TEXT("DataTable'/Game/Table/Actor/ActorTable.ActorTable'"));
+	RequestAsyncLoading();
 }

@@ -14,6 +14,6 @@ public:
 
 	}
 
-	ETableType Type() const override { return ETableType::Actor; }
-	UPROPERTY(EditAnywhere) int32 Take2;
+	UPROPERTY(EditAnywhere) TSoftObjectPtr<UStreamableRenderAsset> ModelMesh;
+	UPROPERTY(EditAnywhere) TSoftObjectPtr<UAnimBlueprint> AnimBP;
 };

@@ -3,28 +3,20 @@
 template<class UnrealTableStruct>
 UnrealTableStruct* ITableM::GetTable(const FName& Tid)
 {
-	for (SharedStreamableHandle& CurHandle: m_ArrayLoadedHandlePtr)
+	for (UDataTable* CurDataTable: m_ArrayLoadedDataTable)
 	{
-		if (false == CurHandle.IsValid())
+		if (nullptr == CurDataTable)
 			continue;
 
-		if (false == CurHandle->HasLoadCompleted())
-			continue;
-
-		UObject* pLoadedAsset = CurHandle->GetLoadedAsset();
-		if (nullptr == pLoadedAsset)
-			continue;
-
-		UDataTable* pLoadedDataTable = Cast<UDataTable>(pLoadedAsset);
-		if (nullptr == pLoadedDataTable)
-			continue;
-
-		UnrealTableStruct* pTable = pLoadedDataTable->FindRow<UnrealTableStruct>(Tid, TEXT(""), false);
+		UnrealTableStruct* pTable = CurDataTable->FindRow<UnrealTableStruct>(Tid, TEXT(""), false);
 		if (nullptr == pTable)
 			continue;
 
 		return pTable;
 	}
+
+	if (ImmediateLoading())
+		return GetTable<UnrealTableStruct>(Tid);
 
 	return nullptr;
 }

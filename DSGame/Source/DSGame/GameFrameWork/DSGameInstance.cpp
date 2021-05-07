@@ -3,15 +3,19 @@
 
 #include "DSGameInstance.h"
 #include "Manager/IManager.h"
+#include "Manager/Table/DSActorTableM.h"
+
+
 
 void UDSGameInstance::Init()
 {
 	Super::Init();
-	Manager::IManager::InitAll();
+	DSActorTableM::Instance();
+	int32 iGot = 0;
 }
 
 void UDSGameInstance::Shutdown()
 {
 	Super::Shutdown();
-	Manager::IManager::ReleaseAll();
+	//Manager::IManager::ReleaseAll();
 }
