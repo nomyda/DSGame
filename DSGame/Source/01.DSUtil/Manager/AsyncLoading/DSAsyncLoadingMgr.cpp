@@ -13,6 +13,11 @@ DSAsyncLoadingM::~DSAsyncLoadingM()
 
 }
 
+EMgrIndex DSAsyncLoadingM::GetIndex() const
+{
+	return EMgrIndex::AsyncLoading;
+}
+
 bool DSAsyncLoadingM::IsValid() const
 {
 	return UAssetManager::IsValid();
@@ -49,11 +54,6 @@ bool DSAsyncLoadingM::CancelAsyncLoading(const uint32 AsyncLoadingID)
 	pInfo->m_HandlePtr->CancelHandle();
 	m_smapAsyncLoadID_And_AsyncLoadingInfo.Remove(AsyncLoadingID);
 	return true;
-}
-
-void DSAsyncLoadingM::OnInstance()
-{
-
 }
 
 void DSAsyncLoadingM::OnLoadingComplete()
