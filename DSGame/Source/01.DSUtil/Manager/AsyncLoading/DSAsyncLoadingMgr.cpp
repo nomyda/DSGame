@@ -2,33 +2,33 @@
 #include "Engine/AssetManager.h"
 
 
-DSAsyncLoadingM::DSAsyncLoadingM()
+DSAsyncLoadingMgr::DSAsyncLoadingMgr()
 	: m_AsyncLoadID(0)
 {
 
 }
 
-DSAsyncLoadingM::~DSAsyncLoadingM()
+DSAsyncLoadingMgr::~DSAsyncLoadingMgr()
 {
 
 }
 
-EMgrIndex DSAsyncLoadingM::GetIndex() const
+EMgrIndex DSAsyncLoadingMgr::GetIndex() const
 {
 	return EMgrIndex::AsyncLoading;
 }
 
-bool DSAsyncLoadingM::IsValid() const
+bool DSAsyncLoadingMgr::IsValid() const
 {
 	return UAssetManager::IsValid();
 }
 
-uint32 DSAsyncLoadingM::RequestAsyncLoading(const FSoftObjectPath& Path, FOnLoadingComplete rDelegate_OnLoadingComplete)
+uint32 DSAsyncLoadingMgr::RequestAsyncLoading(const FSoftObjectPath& Path, FOnLoadingComplete rDelegate_OnLoadingComplete)
 {
 	if (false == IsValid())
 		return InvalidAsyncLoadingID;
 
-	SharedStreamableHandle HandlePtr = GetStreamableM().RequestAsyncLoad(Path, FStreamableDelegate::CreateRaw(this, &DSAsyncLoadingM::OnLoadingComplete));
+	SharedStreamableHandle HandlePtr = GetStreamableM().RequestAsyncLoad(Path, FStreamableDelegate::CreateRaw(this, &DSAsyncLoadingMgr::OnLoadingComplete));
 	if (false == HandlePtr.IsValid())
 		return InvalidAsyncLoadingID;
 
@@ -39,7 +39,7 @@ uint32 DSAsyncLoadingM::RequestAsyncLoading(const FSoftObjectPath& Path, FOnLoad
 	return uiCurAsyncLoadID;
 }
 
-bool DSAsyncLoadingM::CancelAsyncLoading(const uint32 AsyncLoadingID)
+bool DSAsyncLoadingMgr::CancelAsyncLoading(const uint32 AsyncLoadingID)
 {
 	if (false == IsValid())
 		return false;
@@ -56,7 +56,7 @@ bool DSAsyncLoadingM::CancelAsyncLoading(const uint32 AsyncLoadingID)
 	return true;
 }
 
-void DSAsyncLoadingM::OnLoadingComplete()
+void DSAsyncLoadingMgr::OnLoadingComplete()
 {
 	SMap_AsyncLoadID_And_LoadingInfo::TIterator Itr = m_smapAsyncLoadID_And_AsyncLoadingInfo.CreateIterator();
 	while (Itr)
@@ -65,6 +65,7 @@ void DSAsyncLoadingM::OnLoadingComplete()
 		if (false == rInfo.m_HandlePtr.IsValid())
 		{
 			Itr.RemoveCurrent();
+			++Itr;
 			continue;
 		}
 
@@ -76,14 +77,13 @@ void DSAsyncLoadingM::OnLoadingComplete()
 			}
 
 			Itr.RemoveCurrent();
-			continue;
 		}
 
 		++Itr;
 	}
 }
 
-FStreamableManager& DSAsyncLoadingM::GetStreamableM() const
+FStreamableManager& DSAsyncLoadingMgr::GetStreamableM() const
 {
 	static UAssetManager& rAssetM = UAssetManager::Get();
 	static FStreamableManager& rStreamableM = rAssetM.GetStreamableManager();

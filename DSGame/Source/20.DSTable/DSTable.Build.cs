@@ -10,7 +10,7 @@ public class DSTable : ModuleRules
 
         PublicIncludePaths.Add(ModuleDirectory);
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "DSUtil" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "DSCore", "DSUtil" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

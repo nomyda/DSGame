@@ -1,7 +1,7 @@
 #pragma once
 
 template<class T>
-T& DSSingleton<T>::Instance()
+T& DSSingleton<T>::Get()
 {
 	if (false == m_Instance.IsValid())
 	{

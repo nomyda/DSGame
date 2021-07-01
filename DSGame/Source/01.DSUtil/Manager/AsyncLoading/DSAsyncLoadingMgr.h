@@ -12,11 +12,11 @@ public:
 	TArray<FOnLoadingComplete> m_ArrDelegate_OnLoadingComplete;
 };
 
-class DSUTIL_API DSAsyncLoadingM : public TMgr<DSAsyncLoadingM>
+class DSUTIL_API DSAsyncLoadingMgr : public TMgr<DSAsyncLoadingMgr>
 {
 public:
-	DSAsyncLoadingM();
-	~DSAsyncLoadingM();
+	DSAsyncLoadingMgr();
+	~DSAsyncLoadingMgr();
 	EMgrIndex GetIndex() const override;
 
 	bool IsValid() const;

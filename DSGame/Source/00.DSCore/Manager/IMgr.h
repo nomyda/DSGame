@@ -3,9 +3,14 @@
 
 enum class EMgrIndex : int16
 {
+	Ue4,
 	ClientVariable,
 	Timer,
 	AsyncLoading,
+	TableMgr_Actor,
+	TableMgr_Camera,
+	TableMgr_Building,
+	Camera,
 	Max,
 };
 
@@ -24,7 +29,7 @@ protected:
 	static bool TickMgr(float fDeltaSeconds);
 	virtual void OnInit() {}
 	virtual void OnShutdown() {}
-	virtual bool OnTick(float fDeltaSeconds) { return false; }
+	virtual void OnTick(float fDeltaSeconds) {}
 
 private:
 	static TSortedMap<EMgrIndex, IMgr*> ms_smapMgr;

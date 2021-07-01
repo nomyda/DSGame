@@ -8,7 +8,7 @@ class DSSingleton
 {
 public:
 	typedef TSharedPtr<T> SharedSingleton;
-	static T& Instance();
+	static T& Get();
 	virtual void OnSingleton() = 0;
 
 

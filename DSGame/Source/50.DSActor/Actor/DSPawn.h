@@ -6,6 +6,7 @@
 /**
  *
  */
+struct FDSActorTable;
 class UCapsuleComponent;
 UCLASS()
 class DSACTOR_API ADSPawn : public APawn
@@ -20,9 +21,11 @@ public:
 protected:
 	void BeginPlay() override;
 	void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	void Tick(float DeltaSeconds) override;
 
-	void Construct();
+	void Constructor();
 	bool InitActor();
+	void OnGetTable(const FDSActorTable* pTable);
 	void OnLoadingComplete(const uint32 AsyncLoadID, UObject* pLoadedAsset);
 
 private:

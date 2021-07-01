@@ -12,7 +12,7 @@ ADSPawn::ADSPawn()
 	, m_AsyncLoadID_ActorModel(0)
 	, m_AsyncLoadID_AnimBP(0)
 {
-	Construct();
+	Constructor();
 }
 
 ADSPawn::ADSPawn(const FObjectInitializer& ObjectInitializer)
@@ -20,7 +20,7 @@ ADSPawn::ADSPawn(const FObjectInitializer& ObjectInitializer)
 	, m_AsyncLoadID_ActorModel(0)
 	, m_AsyncLoadID_AnimBP(0)
 {
-	Construct();
+	Constructor();
 }
 
 ADSPawn::~ADSPawn()
@@ -39,7 +39,12 @@ void ADSPawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
-void ADSPawn::Construct()
+void ADSPawn::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}
+
+void ADSPawn::Constructor()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
@@ -65,14 +70,18 @@ void ADSPawn::Construct()
 }
 
 bool ADSPawn::InitActor()
-{
-	FDSActorTable* pTable = DSActorTableM::Instance().GetTable<FDSActorTable>(ActorTid);
-	if (nullptr == pTable)
-		return false;
-
-	m_AsyncLoadID_ActorModel = DSAsyncLoadingM::Instance().RequestAsyncLoading(pTable->ModelMesh.ToSoftObjectPath(), FOnLoadingComplete::CreateUObject(this, &ADSPawn::OnLoadingComplete));
-	m_AsyncLoadID_AnimBP = DSAsyncLoadingM::Instance().RequestAsyncLoading(pTable->AnimBP.ToSoftObjectPath(), FOnLoadingComplete::CreateUObject(this, &ADSPawn::OnLoadingComplete));
+{	
+	DSActorTableM::Get().GetTable(ActorTid, DSActorTableM::TDelegate_GetTable::CreateUObject(this, &ADSPawn::OnGetTable));
 	return true;
+}
+
+void ADSPawn::OnGetTable(const FDSActorTable* pTable)
+{
+	if (nullptr == pTable)
+		return;
+
+	m_AsyncLoadID_ActorModel = DSAsyncLoadingMgr::Get().RequestAsyncLoading(pTable->ModelMesh.ToSoftObjectPath(), FOnLoadingComplete::CreateUObject(this, &ADSPawn::OnLoadingComplete));
+	m_AsyncLoadID_AnimBP = DSAsyncLoadingMgr::Get().RequestAsyncLoading(pTable->AnimBP.ToSoftObjectPath(), FOnLoadingComplete::CreateUObject(this, &ADSPawn::OnLoadingComplete));
 }
 
 void ADSPawn::OnLoadingComplete(const uint32 AsyncLoadID, UObject* pLoadedAsset)

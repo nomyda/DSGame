@@ -13,4 +13,5 @@ class IDSActorInterface
 	GENERATED_BODY()
 
 protected:
+	virtual bool InitActor() = 0;
 };

@@ -2,20 +2,20 @@
 
 
 #include "DSGameInstance.h"
-#include "Manager/IManager.h"
-#include "Manager/Table/DSActorTableM.h"
-
+#include "Manager/Ue4/DSUe4Mgr.h"
+#include "Manager/IMgr.h"
 
 
 void UDSGameInstance::Init()
 {
 	Super::Init();
-	DSActorTableM::Instance();
-	int32 iGot = 0;
+	DSUe4Mgr::Get().SetGameInstance(this);
+	IMgr::InitMgr();
 }
 
 void UDSGameInstance::Shutdown()
 {
 	Super::Shutdown();
-	//Manager::IManager::ReleaseAll();
+	IMgr::ShutdownMgr();
+	DSUe4Mgr::Get().SetGameInstance(nullptr);
 }

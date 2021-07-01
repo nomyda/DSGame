@@ -25,10 +25,7 @@ EMgrIndex DSTimerMgr::GetIndex() const
 //	return true;
 //}
 
-float DSTimerMgr::GetRealTimeSeconds(const bool bUtcTime /*= false*/, const int64& iTimeSpan /*= ETimespan::TicksPerSecond*/)
+float DSTimerMgr::GetRealTimeSeconds(const int64& iTimeSpan /*= ETimespan::TicksPerSecond*/)
 {
-	//if (bUtcTime)
-		return (FDateTime::UtcNow().GetTicks() - ms_StandardTime.GetTicks()) / static_cast<float>(iTimeSpan);
-	
-	//return UGameplayStatics::GetRealTimeSeconds();
+	return (FDateTime::UtcNow().GetTicks() - ms_StandardTime.GetTicks()) / static_cast<float>(iTimeSpan);
 }

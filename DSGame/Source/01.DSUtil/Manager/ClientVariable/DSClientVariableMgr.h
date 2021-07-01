@@ -16,4 +16,4 @@ private:
 };
 
 #define DS_Regist_Console_Command( Command, FuncName, Help ) \
-	DSClientVariableMgr::Instance().RegistConsolCommand( Command, FConsoleCommandWithArgsDelegate::CreateStatic( FuncName ), Help );
+	DSClientVariableMgr::Get().RegistConsolCommand( Command, FConsoleCommandWithArgsDelegate::CreateStatic( FuncName ), Help );

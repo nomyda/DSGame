@@ -1,16 +1,19 @@
 #pragma once
-#include "Manager/IManager.h"
 #include "Engine/DataTable.h"
 #include "Manager/AsyncLoading/DSAsyncLoadingMgr.h"
 
-class DSTABLE_API ITableM : public IManager
+class DSTABLE_API BaseTableM
 {
 public:
-	virtual ~ITableM() {}
+	BaseTableM();
+	virtual ~BaseTableM() {}
 	void RequestAsyncLoading(const FName& Key = FName());
 
 	template<class UnrealTableStruct>
-	UnrealTableStruct* GetTable(const FName& Tid);
+	UnrealTableStruct* GetTable(const FName& Tid, const bool bLoad = false);
+	template<class UnrealTableStruct>
+	void GetTable(const FName& Tid, TFunction<void(UnrealTableStruct*)> Callback);
+	bool IsLoadingComplete() const;
 
 protected:
 	typedef TArray<FString> ArrayString;
@@ -25,9 +28,10 @@ protected:
 	TSortedMap<uint32, FString> m_smAsyncLoadingID_AssetPath;
 	TArray<UDataTable*> m_ArrayLoadedDataTable;
 	FName m_KeyToLoad;
+	int32 m_iCount_ImmediateLoading;
 
 	static ArrayString m_ArrayString_Empty;
 };
 
 
-#include "ITableMgr.hpp"
+#include "BaseTableMgr.hpp"

@@ -9,7 +9,7 @@ public:
 	EMgrIndex GetIndex() const override;
 
 public:
-	static float GetRealTimeSeconds(const bool bUtcTime = false, const int64& iTimeSpan = ETimespan::TicksPerSecond);
+	static float GetRealTimeSeconds(const int64& iTimeSpan = ETimespan::TicksPerSecond);
 
 protected:
 	//void OnInit() override;
